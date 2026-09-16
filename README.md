@@ -15,7 +15,14 @@ Informe preliminar.
 El día 11 de septiembre (11:59 pm), para adjuntar la evidencia del proceso de análisis y
 diseño de la solución. (Informe preliminar: Contextualización, Análisis, Diseño).
 
+## Avances
+
+- Implementar reserva y liberacion dinamica del tablero (tablero.h/.cpp)
+- Implementar lectura y escritura de fichas por manipulacion de bits
+- Agregar llenado aleatorio uniforme del tablero
+- Implementar visualizacion del tablero en formato fichas y binario
+
 ## Porcentaje de Avance Estimado
 
-Progress: 1%  
-[█----------------------------------------]
+Progress: 15%  
+[██████----------------------------------]
