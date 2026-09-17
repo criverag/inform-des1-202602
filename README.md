@@ -24,5 +24,5 @@ diseño de la solución. (Informe preliminar: Contextualización, Análisis, Dis
 
 ## Porcentaje de Avance Estimado
 
-Progress: 15%  
-[██████----------------------------------]
+Progreso: 25%  
+[██████████----------------------------------]
