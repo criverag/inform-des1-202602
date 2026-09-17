@@ -1,14 +1,3 @@
-#TEMPLATE = app
-#CONFIG += console c++17
-#CONFIG -= app_bundle
-#CONFIG -= qt
-
-#SOURCES += \
-#        main.cpp
-
-
-####################
-
 QT -= gui
 
 CONFIG += c++17 console
@@ -19,9 +8,11 @@ SOURCES += \
     main.cpp \
     tablero.cpp \
     visualizacion.cpp \
-    interaccion.cpp
+    interaccion.cpp \
+    combinaciones.cpp
 
 HEADERS += \
     tablero.h \
     visualizacion.h \
-    interaccion.h
+    interaccion.h \
+    combinaciones.h

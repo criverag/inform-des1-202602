@@ -4,6 +4,7 @@
 #include "tablero.h"
 #include "visualizacion.h"
 #include "interaccion.h"
+#include "combinaciones.h"
 using namespace std;
 
 
@@ -42,13 +43,17 @@ int main()
          << calcularBytesNecesarios(filas, columnas) << endl;
 
     // ------------------------------------------------------------
-    // El jugador puede seleccionar posiciones
-    // del tablero y eliminar la ficha correspondiente. Por ahora NO
-    // se detectan combinaciones ni se reorganiza el tablero: esa
-    // logica se agregara en un proximo avance, apoyandose en esta
-    // misma eliminacion basica.
+    // El jugador puede seleccionar posiciones del tablero y eliminar
+    // la ficha correspondiente. Despues de cada eliminacion valida,
+    // se revisa si se formaron combinaciones horizontales o verticales
+    // de 3 o mas fichas iguales, y de ser asi, se eliminan tambien.
+    //
+    // Todavia NO se reorganiza el tablero (caida de fichas + relleno)
+    // ni se procesan cascadas: eso se aborda en un proximo avance.
     // ------------------------------------------------------------
     int contadorEliminaciones = 0;
+    int contadorFichasEliminadasTotal = 0;
+    int contadorCombinacionesTotal = 0;
     bool continuarJugando = true;
 
     while (continuarJugando) {
@@ -71,10 +76,32 @@ int main()
 
             if (eliminada) {
                 contadorEliminaciones++;
+                contadorFichasEliminadasTotal++;
                 cout << "Ficha eliminada en (" << filaSeleccionada << ", "
                      << columnaSeleccionada << ").\n";
                 mostrarTableroFichas(tablero, filas, columnas);
                 mostrarTableroBinario(tablero, filas, columnas);
+
+                // Tras la eliminacion manual, se revisa si se formaron
+                // combinaciones de 3 o mas fichas iguales.
+                int combinacionesEnEsteMovimiento = 0;
+                int fichasEnEsteMovimiento = 0;
+                bool huboCombinacion = procesarCombinaciones(tablero, filas, columnas,
+                                                               combinacionesEnEsteMovimiento,
+                                                               fichasEnEsteMovimiento);
+
+                if (huboCombinacion) {
+                    contadorCombinacionesTotal += combinacionesEnEsteMovimiento;
+                    contadorFichasEliminadasTotal += fichasEnEsteMovimiento;
+
+                    cout << "\nSe detectaron " << combinacionesEnEsteMovimiento
+                         << " combinacion(es); se eliminaron " << fichasEnEsteMovimiento
+                         << " ficha(s) adicionales.\n";
+                    mostrarTableroFichas(tablero, filas, columnas);
+                    mostrarTableroBinario(tablero, filas, columnas);
+                } else {
+                    cout << "\nNo se formaron combinaciones tras esta eliminacion.\n";
+                }
             } else {
                 cout << "No se pudo eliminar: la posicion esta fuera del "
                      << "tablero o ya se encuentra vacia.\n";
@@ -82,10 +109,11 @@ int main()
         }
     }
 
-    cout << "\nTotal de eliminaciones realizadas: "
-         << contadorEliminaciones << endl;
-
-
+    cout << "\n--- Resumen de la partida ---\n";
+    cout << "Eliminaciones realizadas por el jugador: " << contadorEliminaciones << endl;
+    cout << "Combinaciones detectadas: " << contadorCombinacionesTotal << endl;
+    cout << "Total de fichas eliminadas (manual + combinaciones): "
+         << contadorFichasEliminadasTotal << endl;
 
     // Se libera la memoria dinamica reservada para el tablero.
     liberarTablero(tablero);

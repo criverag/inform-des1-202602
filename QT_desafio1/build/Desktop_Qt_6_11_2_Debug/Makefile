@@ -55,11 +55,13 @@ OBJECTS_DIR   = ./
 SOURCES       = ../../main.cpp \
 		../../tablero.cpp \
 		../../visualizacion.cpp \
-		../../interaccion.cpp 
+		../../interaccion.cpp \
+		../../combinaciones.cpp 
 OBJECTS       = main.o \
 		tablero.o \
 		visualizacion.o \
-		interaccion.o
+		interaccion.o \
+		combinaciones.o
 DIST          = /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/common/unix.conf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/common/linux.conf \
@@ -299,10 +301,12 @@ DIST          = /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/lex.prf \
 		../../../../QT_desafio1.pro ../../tablero.h \
 		../../visualizacion.h \
-		../../interaccion.h ../../main.cpp \
+		../../interaccion.h \
+		../../combinaciones.h ../../main.cpp \
 		../../tablero.cpp \
 		../../visualizacion.cpp \
-		../../interaccion.cpp
+		../../interaccion.cpp \
+		../../combinaciones.cpp
 QMAKE_TARGET  = QT_desafio1
 DESTDIR       = 
 TARGET        = QT_desafio1
@@ -808,8 +812,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../tablero.h ../../visualizacion.h ../../interaccion.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../tablero.cpp ../../visualizacion.cpp ../../interaccion.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../tablero.h ../../visualizacion.h ../../interaccion.h ../../combinaciones.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../tablero.cpp ../../visualizacion.cpp ../../interaccion.cpp ../../combinaciones.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -859,7 +863,8 @@ compiler_clean: compiler_moc_predefs_clean
 
 main.o: ../../main.cpp ../../tablero.h \
 		../../visualizacion.h \
-		../../interaccion.h
+		../../interaccion.h \
+		../../combinaciones.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 tablero.o: ../../tablero.cpp ../../tablero.h
@@ -872,6 +877,10 @@ visualizacion.o: ../../visualizacion.cpp ../../visualizacion.h \
 interaccion.o: ../../interaccion.cpp ../../interaccion.h \
 		../../tablero.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o interaccion.o ../../interaccion.cpp
+
+combinaciones.o: ../../combinaciones.cpp ../../combinaciones.h \
+		../../tablero.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o combinaciones.o ../../combinaciones.cpp
 
 ####### Install
 
