@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = QT_desafio11.0.0
-DISTDIR = /home/cristian/cristian_2026_06_13/mi_udea/sem-202602/informatica2/202602/desafio1/QT_desafio1/build/Desktop_Qt_6_11_2_Debug/.tmp/QT_desafio11.0.0
+DISTDIR = /home/cristian/cristian_2026_06_13/mi_udea/sem-202602/informatica2/202602/desafio1/inform-des1-202602/QT_desafio1/build/Desktop_Qt_6_11_2_Debug/.tmp/QT_desafio11.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/cristian/Qt/6.11.2/gcc_64/lib
 LIBS          = $(SUBLIBS) /home/cristian/Qt/6.11.2/gcc_64/lib/libQt6Core.so -lpthread   
@@ -54,10 +54,12 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../main.cpp \
 		../../tablero.cpp \
-		../../visualizacion.cpp 
+		../../visualizacion.cpp \
+		../../interaccion.cpp 
 OBJECTS       = main.o \
 		tablero.o \
-		visualizacion.o
+		visualizacion.o \
+		interaccion.o
 DIST          = /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/common/unix.conf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/common/linux.conf \
@@ -296,9 +298,11 @@ DIST          = /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/yacc.prf \
 		/home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/lex.prf \
 		../../../../QT_desafio1.pro ../../tablero.h \
-		../../visualizacion.h ../../main.cpp \
+		../../visualizacion.h \
+		../../interaccion.h ../../main.cpp \
 		../../tablero.cpp \
-		../../visualizacion.cpp
+		../../visualizacion.cpp \
+		../../interaccion.cpp
 QMAKE_TARGET  = QT_desafio1
 DESTDIR       = 
 TARGET        = QT_desafio1
@@ -804,8 +808,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/cristian/Qt/6.11.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../tablero.h ../../visualizacion.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../tablero.cpp ../../visualizacion.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../tablero.h ../../visualizacion.h ../../interaccion.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../main.cpp ../../tablero.cpp ../../visualizacion.cpp ../../interaccion.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -854,7 +858,8 @@ compiler_clean: compiler_moc_predefs_clean
 ####### Compile
 
 main.o: ../../main.cpp ../../tablero.h \
-		../../visualizacion.h
+		../../visualizacion.h \
+		../../interaccion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 tablero.o: ../../tablero.cpp ../../tablero.h
@@ -863,6 +868,10 @@ tablero.o: ../../tablero.cpp ../../tablero.h
 visualizacion.o: ../../visualizacion.cpp ../../visualizacion.h \
 		../../tablero.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualizacion.o ../../visualizacion.cpp
+
+interaccion.o: ../../interaccion.cpp ../../interaccion.h \
+		../../tablero.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o interaccion.o ../../interaccion.cpp
 
 ####### Install
 

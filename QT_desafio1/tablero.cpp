@@ -16,14 +16,10 @@ unsigned char* crearTablero(int filas, int columnas)
 {
     int bytesNecesarios = calcularBytesNecesarios(filas, columnas);
 
-    // Memoria dinamica: el tablero se representa como un arreglo de
-    // bytes (unsigned char) reservado en tiempo de ejecucion, cuyo
-    // tamano depende de las dimensiones indicadas por el usuario.
+
     unsigned char* tablero = new unsigned char[bytesNecesarios];
 
-    // Se inicializa todo el bloque en 0 para no trabajar con memoria
-    // sin inicializar (0 corresponde al codigo de la Ficha A, pero de
-    // todas formas el tablero se llena enseguida en llenarTableroAleatorio).
+
     for (int i = 0; i < bytesNecesarios; i++) {
         tablero[i] = 0;
     }
@@ -58,10 +54,7 @@ unsigned char obtenerFicha(unsigned char* tablero, int posicion)
         // Mascara con un unico 1 en la posicion que interesa leer.
         unsigned char mascara = 1 << (7 - posicionEnByte);
 
-        // Operador & para extraer ese bit especifico del byte.
-        // (Se usa if/else en lugar del operador ternario "?:" para
-        // mantener el codigo dentro de las estructuras de control
-        // vistas en el curso.)
+
         unsigned char bit;
         if (tablero[indiceByte] & mascara) {
             bit = 1;
@@ -69,9 +62,7 @@ unsigned char obtenerFicha(unsigned char* tablero, int posicion)
             bit = 0;
         }
 
-        // Se desplaza "valor" un bit a la izquierda (<<) y se agrega
-        // el nuevo bit leido con un OR (|) en la posicion menos
-        // significativa.
+
         valor = (valor << 1) | bit;
     }
 
