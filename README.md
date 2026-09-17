@@ -17,12 +17,17 @@ diseño de la solución. (Informe preliminar: Contextualización, Análisis, Dis
 
 ## Avances
 
-- Implementar reserva y liberacion dinamica del tablero (tablero.h/.cpp)
-- Implementar lectura y escritura de fichas por manipulacion de bits
-- Agregar llenado aleatorio uniforme del tablero
-- Implementar visualizacion del tablero en formato fichas y binario
+- Detectar y eliminar combinaciones horizontales y verticales.
+  
+- Nuevo modulo combinaciones.h/.cpp: deteccion de rachas de 3+ fichas
+  iguales por fila y por columna, marcado temporal con arreglo auxiliar
+  y eliminacion de las fichas marcadas.
+  
+- 'main.cpp': se invoca 'procesarCombinaciones()' tras cada eliminacion
+  manual exitosa y se amplian los contadores de estado del juego
+  (combinaciones detectadas, fichas eliminadas totales).
 
 ## Porcentaje de Avance Estimado
 
-Progreso: 25%  
-[██████████----------------------------------]
+Progreso: 50%
+[████████████████████--------------------]
